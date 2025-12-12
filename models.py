@@ -865,12 +865,12 @@ class VisionTransformer(nn.Module):
 
         layer_init_values = []
         for i in range(depth):
-            if i < 18:
-                layer_init_values.append(0.1)  # First 18 blocks: 0.1
-            elif i < 24:
-                layer_init_values.append(1e-5)  # Blocks 19-24: 1e-5
+            if depth < 18:
+                layer_init_values.append(0.1)
+            elif depth < 24:
+                layer_init_values.append(1e-5)
             else:
-                layer_init_values.append(1e-6)  # Blocks 25+: 1e-6
+                layer_init_values.append(1e-6)
         
         # Create transformer blocks
         self.blocks = nn.Sequential(*[
